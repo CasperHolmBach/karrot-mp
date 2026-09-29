@@ -1,0 +1,176 @@
+# =========================================================
+# macOS
+# =========================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# =========================================================
+# Windows / Linux (in case the repo is opened elsewhere)
+# =========================================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*~
+.directory
+.Trash-*
+
+# =========================================================
+# VS Code
+# =========================================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# =========================================================
+# Android Studio / IntelliJ
+# =========================================================
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+captures/
+.navigation/
+*.hprof
+
+# =========================================================
+# Flutter / Dart
+# =========================================================
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata.bak
+*.g.dart.bak
+doc/api/
+coverage/
+*.lcov
+.test_coverage.dart
+.fvm/flutter_sdk
+.fvmrc.local
+
+# Symbolication / obfuscation output
+app.*.symbols
+app.*.map.json
+*.symbols
+
+# Web build artifacts
+lib/generated_plugin_registrant.dart
+
+# =========================================================
+# Android (Gradle)
+# =========================================================
+android/.gradle/
+android/captures/
+android/gradlew
+android/gradlew.bat
+android/gradle/wrapper/gradle-wrapper.jar
+android/local.properties
+android/key.properties
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/**/GeneratedPluginRegistrant.java
+android/**/GeneratedPluginRegistrant.kt
+android/.cxx/
+.gradle/
+local.properties
+*.jks
+*.keystore
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# =========================================================
+# Xcode / iOS / macOS (Flutter desktop)
+# =========================================================
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+DerivedData/
+*.xcuserstate
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Flutter/app.flx
+ios/Flutter/app.zip
+ios/Flutter/flutter_assets/
+ios/Flutter/flutter_export_environment.sh
+ios/ServiceDefinitions.json
+ios/Runner/GeneratedPluginRegistrant.*
+ios/build/
+
+macos/Pods/
+macos/Flutter/ephemeral/
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/build/
+
+# CocoaPods / Swift Package Manager
+Pods/
+.swiftpm/
+.build/
+
+# =========================================================
+# Linux / Windows (Flutter desktop)
+# =========================================================
+linux/flutter/ephemeral/
+windows/flutter/ephemeral/
+
+# =========================================================
+# Secrets / environment
+# =========================================================
+.env
+.env.*
+!.env.example
+*.pem
+secrets.dart
+
+# =========================================================
+# Logs / misc
+# =========================================================
+*.log
+*.pid
+*.swp
+*.tmp
+*.class
