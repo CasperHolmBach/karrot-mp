@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'models/item.dart';
 import 'screens/home_screen.dart';
 
 const Color kAccent = Color(0xFFFF6F0F);
@@ -43,22 +42,7 @@ class KarrotApp extends StatelessWidget {
           ),
         ),
       ),
-      // TODO: remove the dummy item before submission (no pre-filled items).
-      home: HomeScreen(
-        items: [
-          Item(
-            id: 'dummy-1',
-            title: 'iPhone 13',
-            price: 450000,
-            location: 'Heukseok-dong',
-            createdAt: DateTime.now().subtract(const Duration(minutes: 3)),
-            category: 'Digital devices',
-            description: 'Barely used, comes with a case.',
-            likeCount: 12,
-            chatCount: 5,
-          ),
-        ],
-      ),
+      home: const HomeScreen(items: []),
     );
   }
 }
