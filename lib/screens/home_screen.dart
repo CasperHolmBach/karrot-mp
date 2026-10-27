@@ -26,9 +26,19 @@ class _HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<_HomeView> {
-  late final List<Item> _items = List.of(widget.items);
-  final Map<String, DateTime> _bumpedAt =
-      {}; // TODO: persist (Bump · Shared Pref)
+  late List<Item> _items = List.of(widget.items);
+
+  // TODO: persist (Bump · Shared Pref)
+  final Map<String, DateTime> _bumpedAt = {};
+
+  // A new list from the parent (e.g. after loading items.json) replaces ours.
+  @override
+  void didUpdateWidget(_HomeView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!identical(oldWidget.items, widget.items)) {
+      _items = List.of(widget.items);
+    }
+  }
 
   Future<void> _openDetail(Item item) async {
     await Navigator.push(
