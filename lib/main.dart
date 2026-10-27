@@ -23,6 +23,10 @@ class KarrotApp extends StatelessWidget {
           surfaceTintColor: Colors.transparent,
           centerTitle: false,
         ),
+        dialogTheme: const DialogThemeData(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+        ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.white,
           selectedItemColor: Colors.black,

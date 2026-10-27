@@ -6,8 +6,16 @@ import '../utils/format.dart';
 class ItemTile extends StatelessWidget {
   final Item item;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
+  final VoidCallback? onLikeTap;
 
-  const ItemTile({super.key, required this.item, this.onTap});
+  const ItemTile({
+    super.key,
+    required this.item,
+    this.onTap,
+    this.onLongPress,
+    this.onLikeTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +23,7 @@ class ItemTile extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
+      onLongPress: onLongPress,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -77,13 +86,25 @@ class ItemTile extends StatelessWidget {
               ),
             ),
 
-            // Right, bottom-aligned: likes and chats
-            Icon(
-              item.isLiked ? Icons.favorite : Icons.favorite_border,
-              size: 16,
-              color: Colors.grey,
+            // Right, bottom-aligned: likes (tappable) and chats
+            GestureDetector(
+              onTap: onLikeTap,
+              behavior: HitTestBehavior.opaque,
+              child: Padding(
+                // No bottom padding, so it stays aligned with the chat count.
+                padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
+                child: Row(
+                  children: [
+                    Icon(
+                      item.isLiked ? Icons.favorite : Icons.favorite_border,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
+                    Text('${item.likeCount}'),
+                  ],
+                ),
+              ),
             ),
-            Text('${item.likeCount}'),
             const SizedBox(width: 8),
             const Icon(Icons.chat_bubble_outline, size: 16, color: Colors.grey),
             Text('${item.chatCount}'),
