@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../data/item_store.dart';
+import '../data/like_store.dart';
 import '../models/item.dart';
 import '../utils/format.dart';
 import 'chat_screen.dart';
@@ -16,6 +18,7 @@ class ItemDetailScreen extends StatefulWidget {
 class _ItemDetailScreenState extends State<ItemDetailScreen> {
   void _toggleLike() {
     setState(() => widget.item.isLiked = !widget.item.isLiked);
+    saveInBackground(LikeStore().toggle(widget.item.id));
   }
 
   void _openChat() {

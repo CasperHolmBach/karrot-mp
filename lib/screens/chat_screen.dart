@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../data/chat_store.dart';
+import '../data/item_store.dart';
 import '../models/item.dart';
 import '../models/message.dart';
 
@@ -18,6 +20,21 @@ class _ChatScreenState extends State<ChatScreen> {
   final _scrollController = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+    _loadLog();
+  }
+
+  Future<void> _loadLog() async {
+    try {
+      final saved = await ChatStore().load(widget.item.id);
+      if (mounted) setState(() => _messages.insertAll(0, saved));
+    } catch (e) {
+      debugPrint('Could not load chat: $e');
+    }
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     _scrollController.dispose();
@@ -32,6 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
       _messages.add(Message(text: text, isMine: true, sentAt: DateTime.now()));
     });
     _controller.clear();
+    saveInBackground(ChatStore().save(widget.item.id, List.of(_messages)));
 
     // Keep the new bubble in view at the bottom of the list.
     WidgetsBinding.instance.addPostFrameCallback((_) {

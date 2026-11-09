@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../data/bump_store.dart';
+import '../data/item_store.dart';
+import '../data/like_store.dart';
 import '../models/item.dart';
 import '../widgets/item_list_view.dart';
 import 'item_detail_screen.dart';
@@ -28,9 +31,6 @@ class _HomeView extends StatefulWidget {
 class _HomeViewState extends State<_HomeView> {
   late List<Item> _items = List.of(widget.items);
 
-  // TODO: persist (Bump · Shared Pref)
-  final Map<String, DateTime> _bumpedAt = {};
-
   // A new list from the parent (e.g. after loading items.json) replaces ours.
   @override
   void didUpdateWidget(_HomeView oldWidget) {
@@ -53,11 +53,14 @@ class _HomeViewState extends State<_HomeView> {
       context,
       MaterialPageRoute(builder: (_) => const WriteScreen()),
     );
-    if (item != null) setState(() => _items.insert(0, item));
+    if (item == null) return;
+    setState(() => _items.insert(0, item));
+    saveInBackground(ItemStore().add(item));
   }
 
   void _toggleLike(Item item) {
     setState(() => item.isLiked = !item.isLiked);
+    saveInBackground(LikeStore().toggle(item.id));
   }
 
   Future<void> _showContextMenu(Item item) async {
@@ -75,7 +78,10 @@ class _HomeViewState extends State<_HomeView> {
     );
     if (!mounted) return;
     if (choice == 'Bump up') _showBumpDialog(item);
-    if (choice == 'Delete') setState(() => _items.remove(item));
+    if (choice == 'Delete') {
+      setState(() => _items.remove(item));
+      saveInBackground(ItemStore().remove(item.id));
+    }
     // Edit / Share: just close the menu.
   }
 
@@ -101,8 +107,8 @@ class _HomeViewState extends State<_HomeView> {
     setState(() {
       _items.remove(item);
       _items.insert(0, item);
-      _bumpedAt[item.id] = DateTime.now();
     });
+    saveInBackground(BumpStore().bump(item.id, DateTime.now()));
   }
 
   @override
