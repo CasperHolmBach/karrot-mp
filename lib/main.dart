@@ -74,6 +74,7 @@ class _HomeLoaderState extends State<_HomeLoader> {
 
   Future<void> _load() async {
     try {
+      await requestStorageAccess();
       final items = await ItemStore().load();
       final liked = await LikeStore().load();
       final bumps = await BumpStore().load();

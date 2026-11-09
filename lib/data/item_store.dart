@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../models/item.dart';
 
@@ -18,6 +19,15 @@ void saveInBackground(Future<void> save) {
 Future<Directory> dataDirectory() async {
   if (Platform.isAndroid) return Directory('/storage/emulated/0/Download');
   return getApplicationDocumentsDirectory();
+}
+
+// On Android, ask for access to the Downloads folder before loading.
+// Android 11+: "All files access" (opens the system setting the first time).
+// Android 10 and older: the regular storage permission.
+Future<void> requestStorageAccess() async {
+  if (!Platform.isAndroid) return;
+  if (await Permission.manageExternalStorage.request().isGranted) return;
+  await Permission.storage.request();
 }
 
 // items.json: a JSON list of Item.toJson objects.
